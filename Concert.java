@@ -1,4 +1,4 @@
-package cp_4_12;
+package CP3;
 import java.util.Scanner;
 class User{
 	String name;
@@ -7,9 +7,7 @@ class User{
 	public void setInfo(String name) {
 		this.name = name;
 	}
-	public String getName() {
-		return name;
-	}
+	
 }
 
 class Seat{
@@ -32,6 +30,10 @@ class Seat{
 		}
 		System.out.print("\n");
 	}
+	public String getlist(int i) {
+		
+		return seat[i];
+	}
 	public void setArray(int num,String name) {
 		seat[num] = name;
 	}
@@ -47,6 +49,7 @@ class Base{
 		for(int i=0; i<3; i++) {
 			value[i] = new Seat(i);
 		}
+		
 		for(int i=0; i<30; i++) {
 			user_info[i] = new User(i);
 			
@@ -74,10 +77,13 @@ class Base{
 	public void show_line(int num) {
 		value[num-1].getSeat();
 	}
-	public void del_name(String name) {
-		for(int i=0; i<30; i++) {
-			if(user_info[i].getName().equals(name)==true) {
-				user_info[i].setInfo("---");
+	public void del_name(String names,int num) {
+		
+		for(int i=0; i<10; i++) {
+			
+			
+			if(value[num-1].getlist(i).equals(names)) {
+				value[num-1].setArray(i,"---");
 			}
 		}
 	}
@@ -89,11 +95,11 @@ class Base{
 public class Concert {
 	public static void main(String[] arg) {
 		Base concert = new Base();
-		System.out.println("¸íÇÄÄÜ¼­Æ®È¦ ¿¹¾à ½Ã½ºÅÛÀÔ´Ï´Ù.");
+		System.out.println("ëª…í””ì½˜ì„œíŠ¸í™€ ì˜ˆì•½ ì‹œìŠ¤í…œì…ë‹ˆë‹¤.");
 		Scanner s = new Scanner(System.in);
 		int num;
 		while(true) {
-			System.out.println("¿¹¾à:1, Á¶È¸2:, Ãë¼Ò:3, ³¡³»±â:4>>");
+			System.out.println("ì˜ˆì•½:1, ì¡°íšŒ2:, ì·¨ì†Œ:3, ëë‚´ê¸°:4>>");
 			num = s.nextInt();
 			if(num==4) {
 				break;
@@ -102,29 +108,29 @@ public class Concert {
 				case 1:
 					String name;
 					int reserv_num;
-					System.out.println("ÁÂ¼® ±¸ºĞ S(1) A(2) B(3)");
+					System.out.println("ì¢Œì„ êµ¬ë¶„ S(1) A(2) B(3)");
 					num = s.nextInt();
 					switch(num) {
 						case 1:
-							System.out.println("ÀÌ¸§");
+							System.out.println("ì´ë¦„");
 							name = s.next();
-							System.out.println("¹øÈ£");
+							System.out.println("ë²ˆí˜¸");
 							reserv_num = s.nextInt();
 							concert.setUser(name,reserv_num,0);
 							
 							break;
 						case 2:
-							System.out.println("ÀÌ¸§");
+							System.out.println("ì´ë¦„");
 							name = s.next();
-							System.out.println("¹øÈ£");
+							System.out.println("ë²ˆí˜¸");
 							reserv_num = s.nextInt();
 							concert.setUser(name,reserv_num,1);
 							
 							break;
 						case 3:
-							System.out.println("ÀÌ¸§");
+							System.out.println("ì´ë¦„");
 							name = s.next();
-							System.out.println("¹øÈ£");
+							System.out.println("ë²ˆí˜¸");
 							reserv_num = s.nextInt();
 							concert.setUser(name,reserv_num,2);
 							break;
@@ -134,38 +140,40 @@ public class Concert {
 					concert.show();
 					break;
 				case 3:
-					System.out.println("ÁÂ¼® S:1, A:2, B:3");
+					System.out.println("ì¢Œì„ S:1, A:2, B:3");
 					num = s.nextInt();
 					String input_user_name;
+					
 					switch(num) {
 						case 1:
-							
 							concert.show_line(num);
-							System.out.print("ÀÌ¸§");
+							System.out.print("ì´ë¦„");
 							input_user_name= s.next();
-							concert.del_name(input_user_name);
+							concert.del_name(input_user_name,num);
 							break;
 						case 2:
 							concert.show_line(num);
-							System.out.print("ÀÌ¸§");
+							System.out.print("ì´ë¦„");
 							input_user_name= s.next();
-							concert.del_name(input_user_name);
+							concert.del_name(input_user_name,num);
 							break;
 						case 3:
 							concert.show_line(num);
-							System.out.print("ÀÌ¸§");
+							System.out.print("ì´ë¦„");
 							input_user_name= s.next();
-							concert.del_name(input_user_name);
+							concert.del_name(input_user_name,num);
 							break;
-								
+						default:
+							System.out.print("retry");
 							
 					}
 					break;
-					
+				 default:
+					System.out.print("retry");
 			}
 			
 		}
-		
+		s.close();
 	}	
 }
 
